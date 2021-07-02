@@ -6,7 +6,7 @@ module.exports = async (bot) => {
   bot.user.setPresence({
       status: 'dnd',
       activity: {
-          name: 'i!help',
+          name: '-help',
           type: 'WATCHING',
           url: 'https://twitch.tv/'
       }

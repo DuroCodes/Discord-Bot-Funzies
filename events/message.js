@@ -3,7 +3,7 @@ const functions = require("../functions/functions.js");
 
 module.exports = async (bot, message) => {
 
-    let prefix = "i!";
+    let prefix = "-";
 
     const args = message.content.split(/ +/g);
     const command = args.shift().slice(prefix.length).toLowerCase();
