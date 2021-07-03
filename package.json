@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "comma-number": "^2.1.0",
     "common-tags": "^1.8.0",
     "dateformat": "^4.5.1",
     "discord-buttons": "^3.2.1",
     "discord.js": "^12.5.3",
     "fortnite": "^4.3.2",
+    "hypixel-api-reborn": "^8.2.0",
     "minecraft-api": "0.0.3",
     "minecraft-user": "^1.1.7",
     "quick.db": "^7.1.3",
