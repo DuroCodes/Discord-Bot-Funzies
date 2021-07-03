@@ -16,7 +16,7 @@ exports.run = async (bot, message, args, functions) => {
   hypixelAPIReborn.getPlayer(args[0]).then((player) => {
       const embed = new Discord.MessageEmbed()
           .setAuthor('SkyWars Stats', bot.user.displayAvatarURL())
-          .setDescription(`[${player.rank}] ${player.nickname}`)
+          .setDescription(`\`[${player.rank}] ${player.nickname}\``)
           .setColor(color.green)
           .setFooter('SkyWars Stats', bot.user.displayAvatarURL())
           .setTimestamp()
