@@ -4,7 +4,7 @@ module.exports = async (bot) => {
 
   console.log(`${bot.user.username} is online!`);
   bot.user.setPresence({
-      status: 'dnd',
+      status: 'idle',
       activity: {
           name: '-help',
           type: 'WATCHING',

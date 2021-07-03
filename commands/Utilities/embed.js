@@ -4,20 +4,25 @@ const color = JSON.parse(fs.readFileSync(`Storage/color.json`, `utf8`));
 
 exports.run = async (bot, message, args, functions) => {
 
-  const channel = message.mentions.channels.first();
-  if(!channel) return functions.errorEmbed(message, message.channel, "Please input a channel.");
+  if(message.member.hasPermission('ADMINISTRATOR')){
+    const channel = message.mentions.channels.first();
+    if(!channel) return functions.errorEmbed(message, message.channel, "Please input a channel.");
 
-  args.shift()
+    args.shift()
 
-  try{
-    const json = JSON.parse(args.join(' '))
-    const { plainText = '' } = json
-
-    channel.send('', {
-      embed: json
-    })
-  } catch(error){
-    return functions.errorEmbed(message, message.channel, `Invalid JSON, create one here: https://embedbuilder.nadekobot.me/`);
+    try{
+      const json = JSON.parse(args.join(' '))
+      const { plainText = '' } = json
+      message.delete();
+      channel.send('', {
+        embed: json
+      })
+    } catch(error){
+      return functions.errorEmbed(message, message.channel, `Invalid JSON, create one here: https://embedbuilder.nadekobot.me/`);
+    }
+  }else {
+    functions.errorEmbed(message, message.channel, "You do not have `ADMINISTRATOR` permissions ");
+    message.delete();
   }
 
 }
@@ -25,5 +30,5 @@ exports.run = async (bot, message, args, functions) => {
 exports.help = {
     name: "embed-builder",
     aliases: ['emb', "embed"],
-    description: "Create an embed."
+    description: "Creates an embed."
 }

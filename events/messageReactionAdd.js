@@ -21,9 +21,11 @@ module.exports = async (bot, reaction, user) => {
   .setDescription(`You can only have one ticket open at a time.`);
 
   let success = new Discord.MessageEmbed()
-  .setColor(color.green)
+  .setColor('#C0142F')
   .setTitle(`🎟️ | Ticket System`)
-  .setDescription(`Please explain the reason for your request. A member of the support team will take care of your ticket shortly.`);
+  .setDescription(`Hello <@${user.id}> our staff team will be with you soon!\nIn the meantime please describe your issue further!`)
+  .setFooter('Ticket System', bot.user.displayAvatarURL())
+  .setTimestamp();
 
   let split = '';
   let usr = user.id.split(split);
@@ -61,7 +63,7 @@ module.exports = async (bot, reaction, user) => {
         ],
         parent: categoria.id,
         reason: `This user needs help`,
-        topic: `**ID:** ${user.id} -- **Tag:** ${user.tag} | m!close`
+        topic: `**ID:** ${user.id} -- **Tag:** ${user.tag} | -close`
       }).then(channel => {
 
         let createdEmbed = new Discord.MessageEmbed()
@@ -72,8 +74,9 @@ module.exports = async (bot, reaction, user) => {
         .setDescription(`A user has opened a ticket and is waiting for their request to be handled.`)
         .addField(`Information`, `**User :** \`${user.tag}\`\n**ID :** \`${user.id}\`\n**Ticket :** ${channel}\n**Date :** \`${dateFormat(new Date(), "mm/dd/yyyy - HH:MM:ss")}\``);
 
+        const ticketsupport = message.guild.roles.cache.find(r => r.name === "Ticket Support");
         if(logsChannel) logsChannel.send(createdEmbed);
-        channel.send(`${user}`, {embed: success});
+        channel.send(`${ticketsupport}`, {embed: success});
         db.set(`ticket.ticket-${usr[0]}${usr[1]}${usr[2]}${usr[3]}`, { user: user.id });
       })
       reaction.users.remove(user.id);
